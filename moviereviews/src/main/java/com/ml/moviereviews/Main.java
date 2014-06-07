@@ -12,8 +12,12 @@ public class Main {
 		List<Sentence> trainSentences = Reader.readSentences(TRAIN_FILE);
 		List<Sentence> testSentences = Reader.readSentences(TEST_FILE);
 		
+		for (Sentence sentence : trainSentences) {
+			System.out.println(sentence.getPhraseId() + "\t" + sentence.getSentenceId() + "\t" + sentence.getPhrase() + "\t" + sentence.getSentiment() + "\n");
+		}
+		
 		for (Sentence sentence : testSentences) {
-			System.out.println(sentence.getSentence() + '\n');
+			System.out.println(sentence.getPhraseId() + "\t" + sentence.getSentenceId() + "\t" + sentence.getPhrase() + "\t" + sentence.getSentiment() + "\n");
 		}
 	}
 }

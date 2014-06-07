@@ -11,8 +11,9 @@ public class Reader {
 	public static List<Sentence> readSentences(String file) {
 		List<Sentence> sentences = new ArrayList<Sentence>();
 		BufferedReader reader = null;
-		String line, previousSentenceId = null;
-		String sentenceId, sentence, sentiment;
+		String line, phrase;
+		Long phraseId, sentenceId;
+		int sentiment;
 
 		try {
 			reader = new BufferedReader(new InputStreamReader(
@@ -22,16 +23,12 @@ public class Reader {
 			while ((line = reader.readLine()) != null) {
 				String[] lineSplitted = line.split("\t");
 
-				sentenceId = lineSplitted[1];
-
-				if (!sentenceId.equals(previousSentenceId)) {
-					sentence = lineSplitted[2];
-					sentiment = lineSplitted.length > 2 ? lineSplitted[3] : "0";
-					
-					sentences.add(new Sentence(sentence, Integer.valueOf(sentiment)));
-					
-					previousSentenceId = sentenceId;
-				}
+				phraseId = Long.parseLong(lineSplitted[0]);
+				sentenceId = Long.parseLong(lineSplitted[1]);
+				phrase = lineSplitted[2];
+				sentiment = Integer.valueOf(lineSplitted.length > 3 ? lineSplitted[3] : "-1");
+				
+				sentences.add(new Sentence(phraseId, sentenceId, phrase, sentiment));	
 			}
 		} catch (IOException e) {
 			throw new RuntimeException(e);
