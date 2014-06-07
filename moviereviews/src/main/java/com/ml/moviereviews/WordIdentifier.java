@@ -2,26 +2,23 @@ package com.ml.moviereviews;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.regex.Pattern;
 
 import opennlp.tools.postag.POSModel;
 import opennlp.tools.postag.POSTaggerME;
 
 public class WordIdentifier {
 
-	private static final String[] relevantPOSTypes = new String[] { "n", "prop" };
-
-	// TODO colocar isso pra tirar palavras que sao numeros
-	// private static final Pattern onlyNumbers = Pattern.compile("\\d*");
+	private static final String[] relevantPOSTypes = new String[] { "JJ", "VB",
+			"VBP", "VBG", "VBZ" };
 
 	private static POSModel model;
 	private POSTaggerME tagger;
 	private String[] tags;
 
 	static {
-		InputStream stream = WordIdentifier.class.getClassLoader()
-				.getResourceAsStream("pt-pos-perceptron.bin");
-		try {
+		ClassLoader classLoader = WordIdentifier.class.getClassLoader();
+		try (InputStream stream = classLoader
+				.getResourceAsStream("en-pos-perceptron.bin")) {
 			model = new POSModel(stream);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
@@ -31,6 +28,10 @@ public class WordIdentifier {
 	public WordIdentifier(String[] sentenceWords) {
 		tagger = new POSTaggerME(model);
 		tags = tagger.tag(sentenceWords);
+	}
+
+	public String getWordTag(int wordIndexOnSentence) {
+		return tags[wordIndexOnSentence];
 	}
 
 	public boolean isRelevantWord(int wordIndexOnSentence) {

@@ -3,8 +3,6 @@ package com.ml.moviereviews;
 import java.util.HashMap;
 import java.util.Map;
 
-import opennlp.tools.postag.POSTaggerME;
-
 public class Sentence {
 
 	private Long phraseId;
@@ -33,7 +31,13 @@ public class Sentence {
 		String term;
 		Long frequency;
 
-		for (String word : words) {
+		WordIdentifier wordIdentifier = new WordIdentifier(words);
+		for (int i = 0; i < words.length; i++) {
+			if (!wordIdentifier.isRelevantWord(i)) {
+				continue;
+			}
+
+			String word = words[i];
 			term = Stemmer.stem(word);
 			frequency = frequencyByTerm.get(term);
 
