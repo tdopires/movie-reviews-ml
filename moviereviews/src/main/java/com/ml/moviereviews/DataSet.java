@@ -27,7 +27,7 @@ public class DataSet {
 		
 		try {
 			writer = new BufferedWriter(new FileWriter(new File(TRAIN_RESULT_FILE)));
-			System.out.println("- " + sentences.size() + " - " + idfs.keySet().size());
+			System.out.println("Sentences: " + sentences.size() + " - Stemmed Terms:" + idfs.keySet().size());
 			
 			for (Sentence sentence : sentences) {
 				frequencyByTerm = sentence.getFrequencyByTerm();
@@ -42,6 +42,8 @@ public class DataSet {
 						writer.write("0,");
 					}
 				}
+				
+				writer.write(String.valueOf(sentence.getSentiment()) + "\n");
 			}
 		} catch (IOException e) {
 			throw new RuntimeException(e);
