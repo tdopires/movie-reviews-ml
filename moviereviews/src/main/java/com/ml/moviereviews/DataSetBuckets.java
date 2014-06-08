@@ -12,7 +12,7 @@ import java.util.Map.Entry;
 public class DataSetBuckets {
 	
 	private static final String TRAIN_RESULT_FILE = "/tmp/train_result_file.txt";
-	private static final int BUCKETS = 3;
+	private static final int BUCKETS = 5;
 
 	public static void generateDataSet(List<Sentence> sentences) {
 		Map<Integer, Bucket> buckets = new HashMap<Integer, Bucket>();

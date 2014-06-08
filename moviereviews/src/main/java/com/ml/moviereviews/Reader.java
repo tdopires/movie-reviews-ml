@@ -29,14 +29,6 @@ public class Reader {
 				if (!sentenceId.equals(oldSentenceId)) {
 					phrase = lineSplitted[2];
 					sentiment = Integer.valueOf(lineSplitted.length > 3 ? lineSplitted[3] : "-1");
-					switch (sentiment) {
-						case 0: sentiment = 0; break;
-						case 1: sentiment = 0; break;
-						case 2: sentiment = 1; break;
-						case 3: sentiment = 2; break;
-						case 4: sentiment = 2; break;
-						default: sentiment = -1;
-					}
 					
 					sentences.add(new Sentence(phraseId, sentenceId, phrase, sentiment));
 					oldSentenceId = sentenceId;
