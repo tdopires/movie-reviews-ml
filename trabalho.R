@@ -12,7 +12,7 @@ library("randomForest")
 ##################
 
 # Diretorio base dos arquivos usados
-base_folder <- "/tmp/trabalho_final/"
+base_folder <- "/tmp/"
 
 # Concatena os parametros
 concat = function(...) {
