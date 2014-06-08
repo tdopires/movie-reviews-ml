@@ -219,11 +219,11 @@ log(" >  Reduzindo a dimensionalidade dos dados para 7 dimensoes...")
 log("")
 reduced_data = pca$x[,1:7]
 
-log(" >  #################################################")
-log(" >  # Rodando o experimento para os dados originais #")
-log(" >  #################################################")
-log("")
-run_experiment(data, expected_classes)
+#log(" >  #################################################")
+#log(" >  # Rodando o experimento para os dados originais #")
+#log(" >  #################################################")
+#log("")
+#run_experiment(data, expected_classes)
 
 log(" >  #####################################################################")
 log(" >  # Rodando o experimento para os dados com dimensionalidade reduzida #")
