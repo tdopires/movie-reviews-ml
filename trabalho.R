@@ -112,10 +112,10 @@ rbf_svm_hiperparameters <- function() {
   elements <- c(0.001, 0.01, 0.1, 1, 10, 100)#, 1000, 10000)
   #elements <- c(1)
   combinations = t(expand.grid(elements, elements))
-  tuples = vector(mode = "list", length = 64)
+  tuples = vector(mode = "list", length = 36)
   #tuples = vector(mode = "list", length = 1)
   
-  for (i in 1:64) {
+  for (i in 1:36) {
     tuples[[i]] = c(combinations[,i][1], combinations[,i][2])
   }
 
@@ -192,6 +192,7 @@ run_classification <- function(data, expected_classes, hiperparameters, classifi
 }
 
 run_experiment <- function(data, expected_classes) {
+if (FALSE) {
   log(" >  >  ##############################")
   log(" >  >  # ALGORITMO: MAXIMUM ENTROPY #")
   log(" >  >  ##############################")
@@ -206,7 +207,7 @@ run_experiment <- function(data, expected_classes) {
   log(" >  >  # ALGORITMO: SVM LINEAR #")
   log(" >  >  #########################")
   run_classification(data, expected_classes, linear_svm_hiperparameters, linear_svm_classificator)
-
+}
   log(" >  >  ######################")
   log(" >  >  # ALGORITMO: SVM RBF #")
   log(" >  >  ######################")
