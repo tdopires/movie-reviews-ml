@@ -2,6 +2,7 @@
 # Aluno: Paulo Vitor Martins do Rego
 # RA: 118343
 
+library("maxent")
 library("caret")
 library("class")
 library("e1071")
@@ -37,6 +38,16 @@ calculate_accuracy <- function(result_classes, expected_classes) {
 ###################
 # CLASSIFICADORES #
 ###################
+
+maximum_entropy_classificator <- function(train_data, test_data, train_classes, test_classes, hiperparameter) {
+  c <- hiperparameter
+
+  classificator <- maxent(train_data, train_classes)
+  result_classes <- predict(classificator, test_data)
+  accuracy <- calculate_accuracy(result_classes, test_classes)
+
+  return (accuracy)
+}
 
 naive_bayes_classificator <- function(train_data, test_data, train_classes, test_classes, hiperparameter) {
   c <- hiperparameter
@@ -81,6 +92,11 @@ knn_classificator <- function(train_data, test_data, train_classes, test_classes
 ###################
 # HIPERPARAMETROS #
 ###################
+
+maximum_entropy_hiperparameters <- function(data, expected_classes) {
+  #return (c(0.001, 0.01, 0.1, 1, 10, 100, 1000, 10000))
+  return (c(1))
+}
 
 naive_bayes_hiperparameters <- function(data, expected_classes) {
   #return (c(0.001, 0.01, 0.1, 1, 10, 100, 1000, 10000))
@@ -179,6 +195,11 @@ run_classification <- function(data, expected_classes, hiperparameters, classifi
 }
 
 run_experiment <- function(data, expected_classes) {
+  log(" >  >  ##############################")
+  log(" >  >  # ALGORITMO: MAXIMUM ENTROPY #")
+  log(" >  >  ##############################")
+  run_classification(data, expected_classes, maximum_entropy_hiperparameters, maximum_entropy_classificator)
+
   log(" >  >  ##########################")
   log(" >  >  # ALGORITMO: NAIVE BAYES #")
   log(" >  >  ##########################")
