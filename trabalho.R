@@ -42,10 +42,6 @@ naive_bayes_classificator <- function(train_data, test_data, train_classes, test
   c <- hiperparameter
 
   classificator <- naiveBayes(train_data, factor(train_classes))
-  log("asdasd")
-  print(classificator)
-  log("gfdfhgd")
-  print(predict(classificator, test_data))
   result_classes <- predict(classificator, test_data)
   accuracy <- calculate_accuracy(result_classes, test_classes)
 
