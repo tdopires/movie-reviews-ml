@@ -62,7 +62,9 @@ public class DataSet {
 		
 		for (String term : numberOfDocumentsThatTheTermAppears.keySet()) {
 			frequency = numberOfDocumentsThatTheTermAppears.get(term);
-			result.put(term, Math.log10(n/frequency));
+			if (frequency > 5) {
+				result.put(term, Math.log10(n/frequency));
+			}
 		}
 		
 		return result;
