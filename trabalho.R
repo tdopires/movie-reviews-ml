@@ -104,18 +104,18 @@ naive_bayes_hiperparameters <- function(data, expected_classes) {
 }
 
 linear_svm_hiperparameters <- function(data, expected_classes) {
-  #return (c(0.001, 0.01, 0.1, 1, 10, 100, 1000, 10000))
-  return (c(1))
+  return (c(0.001, 0.01, 0.1, 1, 10, 100, 1000, 10000))
+  #return (c(1))
 }
 
 rbf_svm_hiperparameters <- function() {
-  #elements <- c(0.001, 0.01, 0.1, 1, 10, 100, 1000, 10000)
-  elements <- c(1)
+  elements <- c(0.001, 0.01, 0.1, 1, 10, 100, 1000, 10000)
+  #elements <- c(1)
   combinations = t(expand.grid(elements, elements))
-  #tuples = vector(mode = "list", length = 64)
-  tuples = vector(mode = "list", length = 1)
+  tuples = vector(mode = "list", length = 64)
+  #tuples = vector(mode = "list", length = 1)
   
-  for (i in 1:1) {
+  for (i in 1:64) {
     tuples[[i]] = c(combinations[,i][1], combinations[,i][2])
   }
 
@@ -123,8 +123,8 @@ rbf_svm_hiperparameters <- function() {
 }
 
 knn_hiperparameters <- function(train_data, test_data, train_classes, test_classes, k) {
-  #return (c(1, 3, 5, 11, 21, 31))
-  return (c(1))
+  return (c(1, 3, 5, 11, 21, 31))
+  #return (c(1))
 }
 
 ##########################
