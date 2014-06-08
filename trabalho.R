@@ -41,10 +41,9 @@ calculate_accuracy <- function(result_classes, expected_classes) {
 naive_bayes_classificator <- function(train_data, test_data, train_classes, test_classes, hiperparameter) {
   c <- hiperparameter
 
-  classificator <- naiveBayes(x = train_data, y = train_classes)
-#print(classificator)
+  classificator <- naiveBayes(train_data, train_classes)
   result_classes <- predict(classificator, test_data)
-print(result_classes)
+  table(predict(classificator, test), test_classes, dnn=list('predicted','actual'))
   accuracy <- calculate_accuracy(result_classes, test_classes)
 
   return (accuracy)
