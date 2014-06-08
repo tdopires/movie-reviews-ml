@@ -91,11 +91,12 @@ rbf_svm_hiperparameters <- function() {
   #elements <- c(0.001, 0.01, 0.1, 1, 10, 100, 1000, 10000)
   elements <- c(1)
   combinations = t(expand.grid(elements, elements))
-  tuples = vector(mode = "list", length = 64)
+  #tuples = vector(mode = "list", length = 64)
+  tuples = vector(mode = "list", length = 1)
   
-  for (i in 1:64) {
-    tuples[[i]] = c(combinations[,i][1], combinations[,i][2])
-  }
+  #for (i in 1:64) {
+    tuples[[1]] = c(combinations[,i][1], combinations[,i][2])
+  #}
 
   return (tuples)
 }
