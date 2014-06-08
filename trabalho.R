@@ -203,8 +203,8 @@ log(" >  Lendo dados...")
 log("")
 file = concat(base_folder, "train_result_file.txt")
 data = read_file(file)
-expected_classes = data[c(3627)]
-data = data[c(1:3626)]
+expected_classes = data[c(588)]
+data = data[c(1:587)]
 
 log(" >  Executando PCA do dados...")
 log("")
