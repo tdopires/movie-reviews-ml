@@ -42,7 +42,9 @@ naive_bayes_classificator <- function(train_data, test_data, train_classes, test
   c <- hiperparameter
 
   classificator <- naiveBayes(x = train_data, y = train_classes)
+print(classificator)
   result_classes <- predict(classificator, test_data)
+print(result_classes)
   accuracy <- calculate_accuracy(result_classes, test_classes)
 
   return (accuracy)
@@ -129,7 +131,7 @@ run_classification <- function(data, expected_classes, hiperparameters, classifi
     test_data <- data[data_partition, ]
     train_classes <- expected_classes[-data_partition, ]
     test_classes <- expected_classes[data_partition, ]
-    max_accuracy <- 0
+    max_accuracy <- -1
 
     log("")
     log(" >  >  >  >  Calculando acuracia media do k-fold externo...")
