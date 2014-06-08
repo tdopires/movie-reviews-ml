@@ -40,10 +40,10 @@ public class DataSetBuckets {
 	private static void writeDataSetFile(Map<Integer, Bucket> buckets, List<Sentence> sentences) {
 		Map<String, Long> frequencyByTerm;
 		BufferedWriter writer = null;
-		Long tf, n, bucketFrequency;
+		Long tf, n, bucketFrequency, zeros = 0l;
 		Double idf;
 		Bucket bucket;
-		Double[] line = new Double[5];
+		Double[] line = new Double[6];
 		
 		try {
 			writer = new BufferedWriter(new FileWriter(new File(TRAIN_RESULT_FILE)));
@@ -51,6 +51,7 @@ public class DataSetBuckets {
 			
 			for (Sentence sentence : sentences) {
 				frequencyByTerm = sentence.getFrequencyByTerm();
+				line[5] = 0d;
 
 				for (int i = 0; i < 5; i++) {
 					bucket = buckets.get(i);
@@ -68,11 +69,22 @@ public class DataSetBuckets {
 						}
 					}
 					
-					writer.write(line[i] + ",");
+					if (line[i] > 0) {
+						line[5] = 1d;
+					}
 				}
-				
-				writer.write(String.valueOf(sentence.getSentiment()) + "\n");
+
+				if (line[5] > 0) {
+					for (int i = 0; i < 5; i++) {
+						writer.write(line[i] + ",");
+					}
+					
+					writer.write(String.valueOf(sentence.getSentiment()) + "\n");
+					zeros++;
+				}
 			}
+			
+			System.out.println("Zeros: " + zeros);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		} finally {

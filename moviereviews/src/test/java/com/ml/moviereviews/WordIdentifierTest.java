@@ -6,7 +6,7 @@ public class WordIdentifierTest {
 
 	@Test
 	public void test() {
-		String phrase = "Best indie of the year , so far .";
+		String phrase = "Run for your lives !";
 		String[] sentence = phrase.split(" ");
 
 		WordIdentifier wordIdentifier = new WordIdentifier(sentence);
