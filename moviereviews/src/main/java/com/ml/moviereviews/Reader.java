@@ -12,7 +12,7 @@ public class Reader {
 		List<Sentence> sentences = new ArrayList<Sentence>();
 		BufferedReader reader = null;
 		String line, phrase;
-		Long phraseId, sentenceId;
+		Long phraseId, sentenceId, oldSentenceId = null;
 		int sentiment;
 
 		try {
@@ -25,10 +25,14 @@ public class Reader {
 
 				phraseId = Long.parseLong(lineSplitted[0]);
 				sentenceId = Long.parseLong(lineSplitted[1]);
-				phrase = lineSplitted[2];
-				sentiment = Integer.valueOf(lineSplitted.length > 3 ? lineSplitted[3] : "-1");
 				
-				sentences.add(new Sentence(phraseId, sentenceId, phrase, sentiment));	
+				if (!sentenceId.equals(oldSentenceId)) {
+					phrase = lineSplitted[2];
+					sentiment = Integer.valueOf(lineSplitted.length > 3 ? lineSplitted[3] : "-1");
+					
+					sentences.add(new Sentence(phraseId, sentenceId, phrase, sentiment));
+					oldSentenceId = sentenceId;
+				}
 			}
 		} catch (IOException e) {
 			throw new RuntimeException(e);
