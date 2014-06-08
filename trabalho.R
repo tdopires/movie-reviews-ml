@@ -78,16 +78,6 @@ knn_classificator <- function(train_data, test_data, train_classes, test_classes
   return (accuracy)
 }
 
-random_forest_classificator <- function(train_data, test_data, train_classes, test_classes, hiperparameter) {
-  mtry <- hiperparameter
-
-  classificator <- randomForest(x = train_data, y = train_classes, mtry = mtry)
-  result_classes <- predict(classificator, test_data)
-  accuracy <- calculate_accuracy(result_classes, test_classes)
-
-  return (accuracy)
-}
-
 ###################
 # HIPERPARAMETROS #
 ###################
@@ -119,11 +109,6 @@ rbf_svm_hiperparameters <- function() {
 knn_hiperparameters <- function(train_data, test_data, train_classes, test_classes, k) {
   #return (c(1, 3, 5, 11, 21, 31))
   return (c(1))
-}
-
-random_forest_hiperparameters <- function(data, expected_classes) {
-  #return (c(2, 3, 5, 10, 20, 40, 60))
-  return (c(10))
 }
 
 ##########################
@@ -213,11 +198,6 @@ run_experiment <- function(data, expected_classes) {
   log(" >  >  # ALGORITMO: K VIZINHOS #")
   log(" >  >  #########################")
   run_classification(data, expected_classes, knn_hiperparameters, knn_classificator)
-
-  log(" >  >  ############################")
-  log(" >  >  # ALGORITMO: RANDOM FOREST #")
-  log(" >  >  ############################")
-  run_classification(data, expected_classes, random_forest_hiperparameters, random_forest_classificator)
 }
 
 ###########################
