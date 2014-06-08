@@ -207,31 +207,31 @@ log(" >  Lendo dados...")
 log("")
 file = concat(base_folder, "train_result_file.txt")
 data = read_file(file)
-expected_classes = data[c(588)]
-data = data[c(1:587)]
+expected_classes = data[c(6)]
+data = data[c(1:5)]
 
-log(" >  Executando PCA do dados...")
-log("")
-pca = prcomp(data)
-
-log(" >  Resultado do PCA:")
-log("")
-print(summary(pca))
-log("")
-
-log(" >  Reduzindo a dimensionalidade dos dados para 7 dimensoes...")
-log("")
-reduced_data = pca$x[,1:270]
-
-#log(" >  #################################################")
-#log(" >  # Rodando o experimento para os dados originais #")
-#log(" >  #################################################")
+#log(" >  Executando PCA do dados...")
 #log("")
-#run_experiment(data, expected_classes)
+#pca = prcomp(data)
 
-log(" >  #####################################################################")
-log(" >  # Rodando o experimento para os dados com dimensionalidade reduzida #")
-log(" >  #####################################################################")
+#log(" >  Resultado do PCA:")
+#log("")
+#print(summary(pca))
+#log("")
+
+#log(" >  Reduzindo a dimensionalidade dos dados para 7 dimensoes...")
+#log("")
+#reduced_data = pca$x[,1:270]
+
+log(" >  #################################################")
+log(" >  # Rodando o experimento para os dados originais #")
+log(" >  #################################################")
 log("")
-run_experiment(reduced_data, expected_classes)
+run_experiment(data, expected_classes)
+
+#log(" >  #####################################################################")
+#log(" >  # Rodando o experimento para os dados com dimensionalidade reduzida #")
+#log(" >  #####################################################################")
+#log("")
+#run_experiment(reduced_data, expected_classes)
 

@@ -51,7 +51,7 @@ public class Main {
 //			System.out.println(sentence.getPhraseId() + "\t" + sentence.getSentenceId() + "\t" + sentence.getPhrase() + "\t" + sentence.getSentiment() + "\n");
 //		}
 
-		DataSet.generateDataSet(trainSentences);
+		DataSetBuckets.generateDataSet(trainSentences);
 //		DataSet.generateDataSet(testSentences);
 	}
 }

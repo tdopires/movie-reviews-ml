@@ -6,9 +6,8 @@ public class WordIdentifierTest {
 
 	@Test
 	public void test() {
-		String[] sentence = new String[] { "This", "quiet", ",",
-				"introspective", "and", "entertaining", "independent", "is",
-				"worth", "seeking" };
+		String phrase = "Best indie of the year , so far .";
+		String[] sentence = phrase.split(" ");
 
 		WordIdentifier wordIdentifier = new WordIdentifier(sentence);
 		for (int i = 0; i < sentence.length; i++) {

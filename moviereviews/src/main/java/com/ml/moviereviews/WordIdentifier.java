@@ -8,7 +8,7 @@ import opennlp.tools.postag.POSTaggerME;
 
 public class WordIdentifier {
 
-	private static final String[] relevantPOSTypes = new String[] { "JJ" };
+	private static final String[] relevantPOSTypes = new String[] { "JJ", "VB", "VBP", "VBG", "VBZ" };
 
 	private static POSModel model;
 	private POSTaggerME tagger;
