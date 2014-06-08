@@ -149,7 +149,6 @@ run_classification <- function(data, expected_classes, hiperparameters, classifi
 
     log("")
     log(" >  >  >  >  Calculando acuracia media do k-fold externo...")
-    log("")
 
     for (hiperparameter in hiperparameters()) {
       data_partitions2 <- createFolds(t(train_classes), ki, list = TRUE, returnTrain = FALSE)
@@ -174,13 +173,11 @@ run_classification <- function(data, expected_classes, hiperparameters, classifi
       log(" >  >  >  >  >  Para o(s) hiperparametro(s) ", paste(hiperparameter, collapse = " e "), ", a acuracia media foi de ", accuracy)
     }
 
-    log("")
     log(" >  >  >  >  A melhor acuracia foi obtida com o(s) hiperparametro(s) ", paste(max_hiperparameter, collapse = " e "), ", e vale ", max_accuracy)
 
     top_accuracy <- classificator(train_data, test_data, train_classes, test_classes, max_hiperparameter)
     average_accuracy <- average_accuracy + top_accuracy
 
-    log("")
     log(" >  >  >  >  A acuracia de todo o conjunto obtida com o(s) hiperparametro(s) ", paste(max_hiperparameter, collapse = " e "), " vale ", top_accuracy)
   }
   
