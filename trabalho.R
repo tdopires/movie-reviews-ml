@@ -94,10 +94,9 @@ rbf_svm_hiperparameters <- function() {
   #tuples = vector(mode = "list", length = 64)
   tuples = vector(mode = "list", length = 1)
   
-  #for (i in 1:64) {
-    #tuples[[i]] = c(combinations[,i][1], combinations[,i][2])
-    tuples[[1]] = c(combinations[,i][1], combinations[,i][2])
-  #}
+  for (i in 1:1) {
+    tuples[[i]] = c(combinations[,i][1], combinations[,i][2])
+  }
 
   return (tuples)
 }
