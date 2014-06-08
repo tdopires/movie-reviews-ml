@@ -104,12 +104,12 @@ naive_bayes_hiperparameters <- function(data, expected_classes) {
 }
 
 linear_svm_hiperparameters <- function(data, expected_classes) {
-  return (c(0.001, 0.01, 0.1, 1, 10, 100, 1000, 10000))
+  return (c(0.001, 0.01, 0.1, 1, 10, 100))#, 1000, 10000))
   #return (c(1))
 }
 
 rbf_svm_hiperparameters <- function() {
-  elements <- c(0.001, 0.01, 0.1, 1, 10, 100, 1000, 10000)
+  elements <- c(0.001, 0.01, 0.1, 1, 10, 100)#, 1000, 10000)
   #elements <- c(1)
   combinations = t(expand.grid(elements, elements))
   tuples = vector(mode = "list", length = 64)
