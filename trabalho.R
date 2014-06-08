@@ -43,7 +43,7 @@ naive_bayes_classificator <- function(train_data, test_data, train_classes, test
 
   classificator <- naiveBayes(train_data, train_classes)
   result_classes <- predict(classificator, test_data)
-  table(predict(classificator, test), test_classes, dnn=list('predicted','actual'))
+  table(predict(classificator, test_data), test_classes, dnn=list('predicted','actual'))
   accuracy <- calculate_accuracy(result_classes, test_classes)
 
   return (accuracy)
