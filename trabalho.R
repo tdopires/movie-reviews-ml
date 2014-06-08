@@ -50,7 +50,8 @@ naive_bayes_classificator <- function(train_data, test_data, train_classes, test
   log("<><><><tc<><>><>")
   log(test_classes)
   classificator <- naiveBayes(train_data, train_classes)
-  log("asdasd", classificator)
+  log("asdasd")
+  classificator
   log("gfdfhgd", predict(classificator, test_data))
   result_classes <- predict(classificator, test_data)
   table(predict(classificator, test_data), test_classes, dnn=list('predicted','actual'))
