@@ -38,6 +38,16 @@ calculate_accuracy <- function(result_classes, expected_classes) {
 # CLASSIFICADORES #
 ###################
 
+naive_bayes_classificator <- function(train_data, test_data, train_classes, test_classes, hiperparameter) {
+  c <- hiperparameter
+
+  classificator <- naiveBayes(x = train_data, y = train_classes)
+  result_classes <- predict(classificator, test_data)
+  accuracy <- calculate_accuracy(result_classes, test_classes)
+
+  return (accuracy)
+}
+
 linear_svm_classificator <- function(train_data, test_data, train_classes, test_classes, hiperparameter) {
   c <- hiperparameter
 
@@ -81,6 +91,11 @@ random_forest_classificator <- function(train_data, test_data, train_classes, te
 ###################
 # HIPERPARAMETROS #
 ###################
+
+naive_bayes_hiperparameters <- function(data, expected_classes) {
+  #return (c(0.001, 0.01, 0.1, 1, 10, 100, 1000, 10000))
+  return (c(1))
+}
 
 linear_svm_hiperparameters <- function(data, expected_classes) {
   #return (c(0.001, 0.01, 0.1, 1, 10, 100, 1000, 10000))
@@ -179,6 +194,11 @@ run_classification <- function(data, expected_classes, hiperparameters, classifi
 }
 
 run_experiment <- function(data, expected_classes) {
+  log(" >  >  ##########################")
+  log(" >  >  # ALGORITMO: NAIVE BAYES #")
+  log(" >  >  ##########################")
+  run_classification(data, expected_classes, naive_bayes_hiperparameters, naive_bayes_classificator)
+
   log(" >  >  #########################")
   log(" >  >  # ALGORITMO: SVM LINEAR #")
   log(" >  >  #########################")
