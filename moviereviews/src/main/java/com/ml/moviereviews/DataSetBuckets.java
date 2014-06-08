@@ -12,14 +12,14 @@ import java.util.Map.Entry;
 public class DataSetBuckets {
 	
 	private static final String TRAIN_RESULT_FILE = "/tmp/train_result_file.txt";
+	private static final int BUCKETS = 3;
 
 	public static void generateDataSet(List<Sentence> sentences) {
 		Map<Integer, Bucket> buckets = new HashMap<Integer, Bucket>();
-		buckets.put(0, new Bucket());
-		buckets.put(1, new Bucket());
-		buckets.put(2, new Bucket());
-		buckets.put(3, new Bucket());
-		buckets.put(4, new Bucket());
+		
+		for (int i = 0; i < BUCKETS; i++) {
+			buckets.put(i, new Bucket());
+		}
 		
 		fillBuckets(buckets, sentences);
 		writeDataSetFile(buckets, sentences);
@@ -43,7 +43,7 @@ public class DataSetBuckets {
 		Long tf, n, bucketFrequency, zeros = 0l;
 		Double idf;
 		Bucket bucket;
-		Double[] line = new Double[6];
+		Double[] line = new Double[BUCKETS + 1];
 		
 		try {
 			writer = new BufferedWriter(new FileWriter(new File(TRAIN_RESULT_FILE)));
@@ -51,9 +51,9 @@ public class DataSetBuckets {
 			
 			for (Sentence sentence : sentences) {
 				frequencyByTerm = sentence.getFrequencyByTerm();
-				line[5] = 0d;
+				line[BUCKETS] = 0d;
 
-				for (int i = 0; i < 5; i++) {
+				for (int i = 0; i < BUCKETS; i++) {
 					bucket = buckets.get(i);
 					line[i] = 0d;
 					
@@ -70,12 +70,12 @@ public class DataSetBuckets {
 					}
 					
 					if (line[i] > 0) {
-						line[5] = 1d;
+						line[BUCKETS] = 1d;
 					}
 				}
 
-				if (line[5] > 0) {
-					for (int i = 0; i < 5; i++) {
+				if (line[BUCKETS] > 0) {
+					for (int i = 0; i < BUCKETS; i++) {
 						writer.write(line[i] + ",");
 					}
 					
