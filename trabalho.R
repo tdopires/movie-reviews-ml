@@ -83,11 +83,13 @@ random_forest_classificator <- function(train_data, test_data, train_classes, te
 ###################
 
 linear_svm_hiperparameters <- function(data, expected_classes) {
-  return (c(0.001, 0.01, 0.1, 1, 10, 100, 1000, 10000))
+  #return (c(0.001, 0.01, 0.1, 1, 10, 100, 1000, 10000))
+  return (c(1))
 }
 
 rbf_svm_hiperparameters <- function() {
-  elements <- c(0.001, 0.01, 0.1, 1, 10, 100, 1000, 10000)
+  #elements <- c(0.001, 0.01, 0.1, 1, 10, 100, 1000, 10000)
+  elements <- c(1)
   combinations = t(expand.grid(elements, elements))
   tuples = vector(mode = "list", length = 64)
   
@@ -99,11 +101,13 @@ rbf_svm_hiperparameters <- function() {
 }
 
 knn_hiperparameters <- function(train_data, test_data, train_classes, test_classes, k) {
-  return (c(1, 3, 5, 11, 21, 31))
+  #return (c(1, 3, 5, 11, 21, 31))
+  return (c(1))
 }
 
 random_forest_hiperparameters <- function(data, expected_classes) {
-  return (c(2, 3, 5, 10, 20, 40, 60))
+  #return (c(2, 3, 5, 10, 20, 40, 60))
+  return (c(10))
 }
 
 ##########################
@@ -217,7 +221,7 @@ log("")
 
 log(" >  Reduzindo a dimensionalidade dos dados para 7 dimensoes...")
 log("")
-reduced_data = pca$x[,1:7]
+reduced_data = pca$x[,1:270]
 
 #log(" >  #################################################")
 #log(" >  # Rodando o experimento para os dados originais #")
