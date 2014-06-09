@@ -14,11 +14,11 @@ public class DataSetBuckets {
 	private static final String TRAIN_RESULT_FILE = "/tmp/train_result_file.txt";
 	private static final String TEST_RESULT_FILE = "/tmp/test_result_file.txt";
 	
-	private static final int BUCKETS = 5;
+	private static final int BUCKETS = 3;
 
 	public static void generateDataSet(List<Sentence> sentences) {
-		List<Sentence> testSentences = sentences.subList(8000, sentences.size());
-		sentences = sentences.subList(0, 8000);
+//		List<Sentence> testSentences = sentences.subList(8000, sentences.size());
+//		sentences = sentences.subList(0, 8000);
 		 
 		Map<Integer, Bucket> buckets = new HashMap<Integer, Bucket>();
 		
@@ -29,7 +29,7 @@ public class DataSetBuckets {
 		fillTrainBuckets(buckets, sentences);
 		writeTrainDataSetFile(buckets, sentences);
 		
-		writeTestDataSetFile(buckets, testSentences);
+//		writeTestDataSetFile(buckets, testSentences);
 	}
 
 	private static void writeTestDataSetFile(Map<Integer, Bucket> buckets, List<Sentence> sentences) {

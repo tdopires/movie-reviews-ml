@@ -48,15 +48,18 @@ log(" >  Lendo dados de treino...")
 log("")
 file = concat(base_folder, "train_result_file.txt")
 train_data = read_file(file)
-train_classes = train_data[c(6)]
-train_data = train_data[c(1:5)]
+train_classes = train_data[c(4)]
+train_classes = train_classes[,1]
+train_data = train_data[c(1:3)]
+
 
 log(" >  Lendo dados de teste...")
 log("")
 file = concat(base_folder, "test_result_file.txt")
 test_data = read_file(file)
-test_classes = test_data[c(6)]
-test_data = test_data[c(1:5)]
+test_classes = test_data[c(4)]
+test_classes = test_classes[,1]
+test_data = test_data[c(1:3)]
 
 log(" >  Executando KNN...")
 accuracy <- knn_classificator(train_data, test_data, train_classes, test_classes, 3)
