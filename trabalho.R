@@ -1,7 +1,3 @@
-# MC906 - Trabalho 3
-# Aluno: Paulo Vitor Martins do Rego
-# RA: 118343
-
 library("maxent")
 library("caret")
 library("class")

@@ -10,22 +10,89 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class DataSetBuckets {
-	
+
 	private static final String TRAIN_RESULT_FILE = "/tmp/train_result_file.txt";
+	private static final String TEST_RESULT_FILE = "/tmp/test_result_file.txt";
+	
 	private static final int BUCKETS = 5;
 
 	public static void generateDataSet(List<Sentence> sentences) {
+		List<Sentence> testSentences = sentences.subList(8000, sentences.size());
+		sentences = sentences.subList(0, 8000);
+		 
 		Map<Integer, Bucket> buckets = new HashMap<Integer, Bucket>();
 		
 		for (int i = 0; i < BUCKETS; i++) {
 			buckets.put(i, new Bucket());
 		}
 		
-		fillBuckets(buckets, sentences);
-		writeDataSetFile(buckets, sentences);
+		fillTrainBuckets(buckets, sentences);
+		writeTrainDataSetFile(buckets, sentences);
+		
+		writeTestDataSetFile(buckets, testSentences);
 	}
 
-	private static void fillBuckets(Map<Integer, Bucket> buckets, List<Sentence> sentences) {
+	private static void writeTestDataSetFile(Map<Integer, Bucket> buckets, List<Sentence> sentences) {
+		Map<String, Long> frequencyByTerm;
+		BufferedWriter writer = null;
+		Long tf, n, bucketFrequency, zeros = 0l;
+		Double idf;
+		Bucket bucket;
+		Double[] line = new Double[BUCKETS + 1];
+		
+		try {
+			writer = new BufferedWriter(new FileWriter(new File(TEST_RESULT_FILE)));
+			System.out.println("Sentences: " + sentences.size());
+			
+			for (Sentence sentence : sentences) {
+				frequencyByTerm = sentence.getFrequencyByTerm();
+				line[BUCKETS] = 0d;
+
+				for (int i = 0; i < BUCKETS; i++) {
+					bucket = buckets.get(i);
+					line[i] = 0d;
+					
+					for (String term : frequencyByTerm.keySet()) {
+						tf = frequencyByTerm.get(term);
+						
+						n = calculateN(bucket);
+						bucketFrequency = calculateBucketFrequency(bucket, term);
+						
+						if (bucketFrequency > 0) {
+							idf = Math.log10(n/bucketFrequency);
+							line[i] += tf * idf;
+						}
+					}
+					
+					if (line[i] > 0) {
+						line[BUCKETS] = 1d;
+					}
+				}
+
+				for (int i = 0; i < BUCKETS; i++) {
+					writer.write(line[i] + ",");
+				}
+				
+				writer.write(String.valueOf(sentence.getSentiment()) + "\n");
+					
+				if (line[BUCKETS] == 0) {
+					zeros++;
+				}
+			}
+			
+			System.out.println("Test Zeros: " + zeros);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		} finally {
+			try {
+				writer.close();
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		}
+	}
+
+	private static void fillTrainBuckets(Map<Integer, Bucket> buckets, List<Sentence> sentences) {
 		Bucket bucket;
 		
 		for (Sentence sentence : sentences) {
@@ -37,7 +104,7 @@ public class DataSetBuckets {
 		}
 	}
 
-	private static void writeDataSetFile(Map<Integer, Bucket> buckets, List<Sentence> sentences) {
+	private static void writeTrainDataSetFile(Map<Integer, Bucket> buckets, List<Sentence> sentences) {
 		Map<String, Long> frequencyByTerm;
 		BufferedWriter writer = null;
 		Long tf, n, bucketFrequency, zeros = 0l;
