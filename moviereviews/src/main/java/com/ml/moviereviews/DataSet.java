@@ -51,7 +51,8 @@ public class DataSet {
 					idf = idfs.get(term);
 					
 					if (tf != null) {
-						writer.write(String.valueOf(tf * idf) + ",");
+//						writer.write(String.valueOf(tf * idf) + ",");
+						writer.write("1,");
 					} else {
 						writer.write("0,");
 					}
@@ -88,7 +89,8 @@ public class DataSet {
 					idf = idfs.get(term);
 					
 					if (tf != null) {
-						writer.write(String.valueOf(tf * idf) + ",");
+//						writer.write(String.valueOf(tf * idf) + ",");
+						writer.write("1,");
 					} else {
 						writer.write("0,");
 					}
