@@ -9,6 +9,6 @@ public class Main {
 
 	public static void main(String[] args) {
 		List<Sentence> trainSentences = Reader.readSentences(TRAIN_FILE);
-		DataSetBuckets.generateDataSet(trainSentences);
+		DataSet.generateDataSet(trainSentences);
 	}
 }
