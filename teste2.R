@@ -144,6 +144,10 @@ test_classes = test_data[c(4389)]
 test_classes = test_classes[,1]
 test_data = test_data[c(1:4388)]
 
+log(" >  Executando Maximum Entropy...")
+accuracy <- maximum_entropy_classificator(train_data, test_data, train_classes, test_classes, 3)
+log("Acuracia: ", accuracy)
+
 log(" >  Executando Naive Bayes...")
 accuracy <- naive_bayes_classificator(train_data, test_data, train_classes, test_classes, 3)
 log("Acuracia: ", accuracy)
