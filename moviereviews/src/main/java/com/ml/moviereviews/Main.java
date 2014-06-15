@@ -2,7 +2,6 @@ package com.ml.moviereviews;
 
 import java.util.List;
 
-
 public class Main {
 
 	private static final String TRAIN_FILE = "/files/train.tsv";

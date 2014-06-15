@@ -55,36 +55,6 @@ naive_bayes_classificator <- function(train_data, test_data, train_classes, test
   return (accuracy)
 }
 
-linear_svm_classificator <- function(train_data, test_data, train_classes, test_classes, hiperparameter) {
-  c <- hiperparameter
-
-  classificator <- svm(x = train_data, y = train_classes, type = 'C', kernel = 'linear', cost = c)
-  result_classes <- predict(classificator, test_data)
-  accuracy <- calculate_accuracy(result_classes, test_classes)
-
-  return (accuracy)
-}
-
-rbf_svm_classificator <- function(train_data, test_data, train_classes, test_classes, hiperparameter) {
-  c <- hiperparameter[1]
-  gamma <- hiperparameter[2]
-
-  classificator <- svm(x = train_data, y = train_classes, type = 'C', kernel = 'radial', cost = c, gamma = gamma)
-  result_classes <- predict(classificator, test_data)
-  accuracy <- calculate_accuracy(result_classes, test_classes)
-
-  return (accuracy)
-}
-
-knn_classificator <- function(train_data, test_data, train_classes, test_classes, hiperparameter) {
-  k <- hiperparameter
-
-  result_classes <- knn(train_data, test_data, train_classes, k = k)
-  accuracy <- calculate_accuracy(result_classes, test_classes)
-
-  return (accuracy)
-}
-
 ###################
 # HIPERPARAMETROS #
 ###################
@@ -97,30 +67,6 @@ maximum_entropy_hiperparameters <- function(data, expected_classes) {
 naive_bayes_hiperparameters <- function(data, expected_classes) {
   #return (c(0.001, 0.01, 0.1, 1, 10, 100, 1000, 10000))
   return (c(1))
-}
-
-linear_svm_hiperparameters <- function(data, expected_classes) {
-  return (c(0.001, 0.01, 0.1, 1, 10, 100))#, 1000, 10000))
-  #return (c(1))
-}
-
-rbf_svm_hiperparameters <- function() {
-  elements <- c(0.001, 0.01, 0.1, 1, 10, 100)#, 1000, 10000)
-  #elements <- c(1)
-  combinations = t(expand.grid(elements, elements))
-  tuples = vector(mode = "list", length = 36)
-  #tuples = vector(mode = "list", length = 1)
-  
-  for (i in 1:36) {
-    tuples[[i]] = c(combinations[,i][1], combinations[,i][2])
-  }
-
-  return (tuples)
-}
-
-knn_hiperparameters <- function(train_data, test_data, train_classes, test_classes, k) {
-  return (c(1, 3, 5, 11, 21, 31))
-  #return (c(1))
 }
 
 ###########################
@@ -151,4 +97,3 @@ log("Acuracia: ", accuracy)
 log(" >  Executando Naive Bayes...")
 accuracy <- naive_bayes_classificator(train_data, test_data, train_classes, test_classes, 3)
 log("Acuracia: ", accuracy)
-
